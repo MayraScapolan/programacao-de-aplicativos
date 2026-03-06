@@ -1,20 +1,23 @@
-saldo_inicial = 1000.00
-menu = input("qual operação você ira realizar? 1(deposito) 2(saque) 3(extrato):")
+saldo = 1000.00
+menu = input("escolha 1 para deposito, 2 para saque e 3 para extrato ")
+print("1- deposito")
+print("2- saque")
+print("3- extrato")
+
 
 if menu == "1":
-    deposito = float(input("qual o valor que vc quer depositar"))
-    if deposito > 0:
-
-        valor_final = saldo_inicial + deposito
+    valor = float(input("digite o seu valor: "))
+    if valor > 0.00:
+        total = valor + saldo 
+        print("o valor depositado foi " , total)
+        imprimir("o valor depositado foi", total)
 
 elif menu == "2":
-   saque = float(input("qual o valor que vc quer sacar?"))
-   if (saque > 0 and saque <= saldo) or valor == 100.00:
-        valor_final = saldo_inicial - saque
+    valor = float(input("digite o seu valor desejado: "))
+    if valor > 0 and (valor <= saldo or valor == 100):
+        print("o valor sacado foi " , valor)
+        imprimir("o valor sacado foi" , valentia)
 
-
-elif menu == "3":
-    print("seu saldo é: ", saldo_inicial)
-    valor_final = saldo_inicial
-    
- print("seu saldo agora é; ", valor_final)
+elif menu == "S"
+    print("seu saldo atual e" , saldo)
+    imprimir("seu saldo atual é", saldo)
