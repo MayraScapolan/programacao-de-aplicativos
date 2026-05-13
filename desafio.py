@@ -1,30 +1,45 @@
-cliente = input("Nome do Cliente: ")
-valor_original = float(input("Valor da Compra: R$ "))
-distancia = int(input("Distância (km): "))
-tem_cupom = input("Possui cupom? (S/N): ")
+def listar_destino():
+    with open('viagem.txt', 'r') as n:
+        destinos = n.readlines()
 
-desconto = 0.0
+        i = 0
+        for destino in destinos:
+            print(f"{i}" - {destinos.strip()})
+            i += 1
 
-if valor_original >= 1000.0 and tem_cupom == "S":
-    desconto = valor_original * 0.20
-elif valor_original > 500.0 and tem_cupom == "S":
-    desconto = valor_original * 0.10
+def editar_destino():
+    ler()
+    idx = int(input("Digite o id do lugar que deseja atualizar: "))
+    novo_destino = input("Novo Destino: ")
 
-valor_com_desconto = valor_original - desconto
+    with open('viagem.txt', 'r') as n:
+        linhas = n.readlines()
 
-frete = 40.0
-if distancia <= 50 and valor_com_desconto > 200.0:
-    frete = 0.0
+    linhas[idx] = novo_destino + '/n'
 
-total_final = valor_com_desconto + frete
+    with open('viagem.txt', 'w') as n:
+        f.writelines(linhas)
+    print("Destino adicionado!")
 
-print("-" * 30)
-print(f"RELATÓRIO DE COMPRA - {cliente}")
-print(f"Valor Original: R$ {valor_original:.2f}")
-print(f"Desconto: R$ {desconto:.2f}")
-print(f"Frete: R$ {frete:.2f}")
-print(f"TOTAL A PAGAR: R$ {total_final:.2f}")
+def deletar_destino():
+    ler()
+    idx = int(input("Digite o id do lugar que deseja deletar: "))
 
-if desconto == (valor_original * 0.20):
-    print("SURPRESA: Você ganhou um Mousepad Gamer de brinde!")
-print("-" * 30)
+    with open('viagem.txt', 'r') as n:
+        linhas = n.readlines()
+    del linhas[idx]
+    with open('viagem.txt', "w") as n:
+        f.writelines(linhas)
+    print("Destino removido!")
+
+while True:
+    print("\n1-Adicionar destino  | 2-Listar sugestões | 3-Editar sugestão| 4-Deletar sugestão| 5-Sair")
+    opcao = int(input("escolha uma opção: "))
+
+    if opcao == '1': adicionar()
+    elif opcao == '2': listar()
+    elif opcao == '3': editar()
+    elif opcao == '4': deletar()
+    elif opcao == '5': 
+        print("programa encerrado!")
+        break 
