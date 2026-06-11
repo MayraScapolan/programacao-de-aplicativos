@@ -19,12 +19,10 @@ idade_aluno = int(input("IDADE: "))
 CPF_aluno = input("CPF: ")
 
 comando_inserir = (f'''
-                        insert  into alunos (nome, telefone, idade,cpf)
+                        insert  into alunos (nome, telefone, turma, idade,cpf)
                         values('{nome_aluno}','{telefone_aluno}','{turma_aluno}',{idade_aluno},'{CPF_aluno}' )
                         ''')
                         
 cursor.execute(comando_inserir)
-conexão.commit()
-conexão.close 
-
- 
+conexao.commit()
+conexao.close
