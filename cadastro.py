@@ -1,40 +1,123 @@
-import sqlite3 #Importa o SQLite para trabalhar com banco de dados.
+import sqlite3
 
-conexao = sqlite3.connect('escola.db') #Conecta ao banco escola.db.
-cursor = conexao.cursor() #O cursor é responsável por executar comandos SQL no banco de dados.
-cursor.execute(''' 
-      CREATE TABLE IF NOT EXISTS alunos (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        nome TEXT NOT NULL,
-        telefone TEXT,
-        turma TEXT,
-        idade INTEGER,
-        cpf TEXT UNIQUE NOT NULL
-    )''') #Executa um comando SQL para criar a tabela alunos caso ela ainda não exista.
+#cadastro
+def cadastrar(): 
 
-nome_aluno = input("NOME: ") #Pede ao usuário que digite o nome.
-telefone_aluno = input("TELEFONE: ") #Pede o telefone.
-turma_aluno = input("TURMA: ") #Pede a turma.
-idade_aluno = int(input("IDADE: ")) #Pede a idade e converte o valor para inteiro usando int().
-CPF_aluno = input("CPF: ") #Pede o CPF.
+    conexao = sqlite3.connect('escola_demonstracao.db')
+    cursor = conexao.cursor()
 
-comando_inserir = (f'''
-                        insert  into alunos (nome, telefone, turma, idade,cpf)
-                        values('{nome_aluno}','{telefone_aluno}','{turma_aluno}',{idade_aluno},'{CPF_aluno}' )
-                        ''') #A letra f antes das aspas indica uma F-String, ela substitui as variáveis pelos valores digitados pelo usuário.
-                        
-cursor.execute(comando_inserir) #Envia o comando SQL para o banco de dados e cadastra o aluno.
-conexao.close #Fecha a conexão com o banco de dados para liberar recursos. 
+
+    cursor.execute('''
+                    CREATE TABLE IF NOT EXISTS alunos (
+                id  INTEGER PRIMARY KEY AUTOINCREMENT,
+                nome TEXT NOT NULL,
+                telefone TEXT,
+                turma TEXT,
+                idade INTERGER,
+                cpf TEXT UNIQUE NOT NULL
+                )
+                ''')
+
+
+    nome_aluno = input (" Digite o nome do aluno: ")
+    telefone_aluno = input (" Digite o telefone do alunos: ")
+    turma_aluno = input (" Digite qual a sua turma: ")
+    idade_aluno = int(input(" Digite a sua idade: "))
+    cpf_aluno = input(" Digite seu CPF: ")
+
+
+    comando_inserir = f'''
+        INSERT INTO  alunos (nome, telefone, turma, idade, cpf)
+        values ('{nome_aluno}', '{telefone_aluno}', '{turma_aluno}', '{idade_aluno}', '{cpf_aluno}')
+        '''
+
+    cursor.execute(comando_inserir)
+
+    conexao.commit()
+
+    print("cadastro realizado")
+
+    conexao.close()
+
 
 #listar
+def listar():
 
-conexao = sqlite3.connect('escola_demonstracao.db')
-cursor = conexao.cursor()
-cursor.execute(''' select * from alunos ''')
-alunos = cursor.fetchall()
-if not alunos:
-    print("nenhum aluno cadastrado")
-else:
-    for aluno in alunos:
-        print(f"nome = {aluno[0]}, idade = {aluno[1]}")
-conexao.close()
+    conexao = sqlite3.connect('escola_demonstracao.db')
+    cursor = conexao.cursor()
+
+    cursor.execute("SELECT * FROM alunos") 
+    alunos = cursor.fetchall() 
+
+    print("=== Lista de Aluno ===")
+
+    for aluno in alunos: 
+        print(f"ID: {aluno[0]}")
+        print(f"Nome: {aluno[1]}")
+        print(f"Telefone: {aluno[2]}")
+        print(f"Turma: {aluno[3]}")
+        print(f"Idade: {aluno[4]}")
+        print(f"CPF: {aluno[5]}")
+        print("-" * 30)
+
+
+
+
+#alterar
+def alterar():
+
+    conexao = sqlite3.connect('escola_demonstracao.db')
+    cursor = conexao.cursor()
+
+    id_aluno = int(input(" Qual seu ID: "))
+
+    cursor.execute(f'''SELECT nome , cpf , telefone , idade , turma FROM alunos WHERE id = {id_aluno}''')
+    
+    aluno = cursor.fetchone()
+
+    if not aluno:
+        print(" Não encontrado ")
+    else:
+        print(f" Nome atual {aluno[0]} ")
+        print(f" CPF atual {aluno [1]} ")
+        print(f" Telefone atual {aluno[2]} ")
+        print(f" Idade atual {aluno [3]} ")
+        print(f" Turma atual {aluno [4]} ")
+
+        nome_atualizado = input(" Atualize seu nome: ")
+        cpf_atualizado = input(" Atualize seu CPF: ")
+        telefone_atualizado = input(" Atualize se telefone: ")
+        idade_atualizada = input(" Atualize sua idade: ")
+        turma_atualizada = input(" Atualize sua turma: ")
+
+        cursor.execute(f'''
+                        UPDATE alunos
+                        SET nome ='{nome_atualizado}', CPF ='{cpf_atualizado}', Telefone ='{telefone_atualizado}', Idade ='{idade_atualizada}', Turma ='{turma_atualizada}'
+                    WHERE id ={id_aluno}
+                        ''')
+        conexao.commit()
+        print(" Dados alterados ")
+
+        conexao.close()
+
+
+def deletar():
+
+
+    conexao = sqlite3.connect("escola_demonstracao.db")
+    cursor = conexao.cursor()
+
+    id_aluno = int(input(" Qual ID deseja deletar: " ))
+
+    
+    cursor.execute(f'''SELECT id FROM Alunos WHERE Id = {id_aluno}''')
+    aluno = cursor.fetchone()
+
+    if not aluno:
+        print ("Aluno não encontrado ")
+    else:
+        cursor.execute(f'''DELETE FROM Alunos WHERE Id = {id_aluno}''')
+        conexao.commit()
+        print("aluno deletado")
+
+        conexao.close()
