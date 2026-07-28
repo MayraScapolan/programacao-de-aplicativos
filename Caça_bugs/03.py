@@ -1,35 +1,5 @@
 import sqlite3
 
-def criar_tabelas():
-    conexao = sqlite3.connect('sistema_escola.db')
-    cursor = conexao.cursor()
-
-    #este bloco quebra ao rodar pela primeira vez em um banco limpo. pq?
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS series (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nome_serie text, 
-            ID_ESCOLA integer,
-            FOREIGN KEY (id_escola REFERENCES escolas(id)
-        )
-        ''')
-        
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS escolas (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nome TEXT
-        )
-    ''')
-    conexao.commit()
-    conexao.close()
-
-  # Erro: faltou criar a tabela 'escolas' antes da tabela 'series', pois a chave estrangeira precisa que a tabela de referência já exista.
-
-
-#correto
-
-import sqlite3
-
 def criar_tabela():
     conexao = sqlite3.connect('sistema_escola.db')
     cursor = conexao.cursor()
@@ -52,3 +22,4 @@ def criar_tabela():
 
     conexao.commit()
     conexao.close()
+    # Erro: faltou criar a tabela 'escolas' antes da tabela 'series', pois a chave estrangeira precisa que a tabela de referência já exista.
