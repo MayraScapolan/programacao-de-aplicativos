@@ -1,5 +1,3 @@
-# Erro: o fetchall() só consegue pegar os dados uma vez. Depois disso, o cursor fica vazio.
-
 import sqlite3
 
 def verificar_registros():
@@ -14,3 +12,5 @@ def verificar_registros():
     print("Segundo print:", dados)
 
     conexao.close()
+
+#  O fetchall() só consegue pegar os dados uma vez, depois disso o cursor fica vazio.

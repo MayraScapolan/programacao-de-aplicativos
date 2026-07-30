@@ -1,8 +1,7 @@
-
 import sqlite3
 
 def cadastrar_escola_manual():
-    conexao = None 
+    conexao = None
 
     try:
         id_escola = int(input("Digite o ID para a nova escola: "))

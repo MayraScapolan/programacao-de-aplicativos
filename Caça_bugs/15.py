@@ -1,5 +1,3 @@
-# Erro: a coluna id_serie não tinha um tipo definido para guardar o ID da série.
-
 import sqlite3
 
 def criar_tabela_turma():
@@ -17,3 +15,5 @@ def criar_tabela_turma():
 
     conexao.commit()
     conexao.close()
+
+#  A coluna id_serie não tinha um tipo definido para guardar o ID da série.

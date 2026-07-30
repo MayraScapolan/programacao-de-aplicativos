@@ -1,5 +1,3 @@
-# Erro: a variável id_escola foi usada de forma errada no comando DELETE.
-
 import sqlite3
 
 def deletar_escola_antiga():
@@ -11,3 +9,6 @@ def deletar_escola_antiga():
 
     conexao.commit()
     conexao.close()
+
+    # A variável id_escola foi usada de forma errada no comando DELETE.
+

@@ -1,25 +1,21 @@
-# Erro: esta faltando um except para identificar um erro de escrita.
 import sqlite3
 
 def vincular_aluno_turma():
     nome = input("Nome do aluno: ")
-
+    #se o usuario digitar "turma B" em vez do numero do ID, o sistema quebra.
+    # O try/except abaixo falhou em capturar ese erro. Qual o problema?
     try:
-        id_turma = int(input("Digite o ID numérico da turma: "))
-    except ValueError:
-        print("Erro: O ID da turma precisa ser um número inteiro!")
-        return
-    
-    conexao = None
-    try:
-
+        id_turma = int(input("Digite o ID numerico da turma:"))
         conexao = sqlite3.connect('sistema_escola.db')
         cursor = conexao.cursor()
-        cursor.execute("INSERT INTO alunos (nome, id_turma) VALUES (?, ?)", (nome, id_turma))
+        cursor.execute("INSERT INTO alunos (nome, id turma) VALUES (?, ?)", ('nome', 'id_turma'))
         conexao.commit()
-        print("Aluno vinculado com sucesso!")
-    except sqlite3.Error as e:
-        print("Erro no banco de dados: {e}")
+    except ValueError:
+        print("Erro: Digite apenas numeros!")
+    except sqlite3.Error:
+        print("Erro no banco de dados!")
     finally:
-        if conexao:
-            conexao.close()
+        conexao.close()
+
+#  A conversão int() gera um ValueError 
+# Falta um execept para capturar o erro de escrita

@@ -1,6 +1,5 @@
-# Erro: se a conexão falhar, ela não existe e o finally tenta fechar algo que não foi criado.
-
 import sqlite3
+
 
 def cadastrar_serie_seguro(nome, id_escola):
     conexao = None
@@ -22,3 +21,5 @@ def cadastrar_serie_seguro(nome, id_escola):
     finally:
         if conexao:
             conexao.close()
+
+# Se a conexão falhar, ela não existe e o finally tenta fechar algo que não foi criado.

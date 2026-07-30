@@ -1,5 +1,3 @@
-# Erro: faltava a condição ON para ligar alunos e turmas corretamente.
-
 import sqlite3
 
 def listar_alunos_e_turma():
@@ -16,3 +14,6 @@ def listar_alunos_e_turma():
     for linha in cursor.fetchall():
         print(f"Aluno: {linha[0]} | Turma: {linha[1]}")
         conexao.close()
+
+# Faltava a condição ON para ligar alunos e turmas de forma correta. 
+
