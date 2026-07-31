@@ -16,4 +16,3 @@ def listar_alunos_e_turma():
         conexao.close()
 
 # Faltava a condição ON para ligar alunos e turmas de forma correta. 
-

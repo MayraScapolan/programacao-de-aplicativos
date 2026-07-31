@@ -13,5 +13,3 @@ def inicializar_banco():
 
     conexao.commit() # o banco de dados nao foi criado
     conexao.close() 
-
-

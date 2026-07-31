@@ -24,4 +24,3 @@ def criar_tabelas():
     conexao.close()
 
 # estava dando erro porque estava puxando uma referencia de umna tabela que nao existe
-

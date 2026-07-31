@@ -11,6 +11,6 @@ def cadastrar_professsor(nome, cpf):
         CREAT TABLE IF NOT EXISTS professores (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nome TEXT
-            cpf TEXT UNIQUE 
+            cpf UNIQUE 
         )
     ''')

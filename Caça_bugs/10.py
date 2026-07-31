@@ -5,10 +5,9 @@ def deletar_escola_antiga():
     conexao = sqlite3.connect('sistema_escola.db')
     cursor = conexao.cursor()
 
-    cursor.execute("DELETE FROM escolas WHERE id = ?", (id_escola,))
+    cursor.execute("DELETE * FROM escolas WHERE id = ?", (id_escola,))
 
     conexao.commit()
     conexao.close()
 
     # A variável id_escola foi usada de forma errada no comando DELETE.
-
