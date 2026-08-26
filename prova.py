@@ -30,9 +30,7 @@ def cadastrar_fabricante():
     try:
         nome = input("Fabricante: ")
         cnpj = input("CNPJ: ")
-        if not nome or not cnpj:
-            print("Preencha os campos.")
-            return
+        
         banco.execute(
             "INSERT INTO fabricantes_marcas(nome_fabricante,cnpj) VALUES(?,?)",
             (nome, cnpj))
@@ -72,7 +70,7 @@ def excluir_fabricante():
         id = int(input("ID: "))
         if banco.execute(
             "SELECT id FROM centros_distribuicao WHERE id_fabricante=?",
-            (id,)).fetchone():
+            (id,)).fetchone(): #nao foi assim
             print("Fabricante possui centros vinculados.")
             return
         c = banco.execute(
