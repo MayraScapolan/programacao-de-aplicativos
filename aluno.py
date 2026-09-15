@@ -10,3 +10,6 @@ def listar_alunos():
         print(aluno)
 
     conexao.close()
+
+
+#Ao executar o menu.py e escolher a opção de listar alunos, os registros já aparecerão ordenados alfabeticamente.
